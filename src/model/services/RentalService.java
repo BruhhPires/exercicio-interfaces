@@ -10,12 +10,12 @@ public class RentalService {
 	private Double pricePerHour;
 	private Double pricePerDay;
 	
-	private BrazilTaxService TaxService;
+	private TaxService taxService;
 
-	public RentalService(Double pricePerHour, Double pricePerDay, BrazilTaxService brazilTaxService) {
+	public RentalService(Double pricePerHour, Double pricePerDay, TaxService taxService) {
 		this.pricePerHour = pricePerHour;
 		this.pricePerDay = pricePerDay;
-		this.TaxService = brazilTaxService;
+		this.taxService = taxService;
 	}
 		
 		
@@ -31,7 +31,7 @@ public class RentalService {
 			basicPayment = pricePerDay * Math.ceil(hours/24);
 		}
 		
-		double tax = TaxService.tax(basicPayment);						 // PEGA O METODO USANDO BASICPAYMENT COMO ARGUMENTO
+		double tax = taxService.tax(basicPayment);						 // PEGA O METODO USANDO BASICPAYMENT COMO ARGUMENTO
 		
 		carRental.setInvoice(new Invoice(basicPayment, tax)); 			// CHAMAMOS O METODO DA CLASSE CARRENTAL E SETAMOS OS DADOS DA INVOICE PARA VINCULA-LOS
 		
